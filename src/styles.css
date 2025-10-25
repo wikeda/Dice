@@ -184,14 +184,14 @@ header h1 {
 }
 
 .dice-result {
-  padding: 8px;
-  border-radius: 8px;
+  padding: 10px;
+  border-radius: 10px;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.15);
   font-weight: 600;
-  font-size: 1.4rem;
-  width: 40px;
-  height: 40px;
+  font-size: 1.6rem;
+  width: 50px;
+  height: 50px;
   text-align: center;
   display: flex;
   align-items: center;
@@ -265,10 +265,10 @@ header h1 {
   }
 
   .dice-result {
-    padding: 6px;
-    width: 32px;
-    height: 32px;
-    font-size: 1.3rem;
+    padding: 8px;
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
   }
 
   .total-result {
@@ -304,10 +304,10 @@ header h1 {
   }
 
   .dice-result {
-    padding: 4px;
-    width: 28px;
-    height: 28px;
-    font-size: 1.2rem;
+    padding: 6px;
+    width: 36px;
+    height: 36px;
+    font-size: 1.4rem;
   }
 
   .total-result {
