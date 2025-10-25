@@ -12,8 +12,19 @@
     <div id="app">
       <div class="background-glow"></div>
       <main class="container" aria-live="polite">
-        <header></header>
+        <!--header></header-->
 
+        <p class="gesture-hint">3Dエリア上でスワイプしても振ることができます。</p>
+
+        <section class="game-area">
+          <div id="three-container" aria-label="3Dサイコロテーブル"></div>
+        </section>
+
+        <section class="results">
+          <div id="dice-results" class="results-list" aria-live="polite"></div>
+          <div id="total-result" class="total-result">Total: –</div>
+        </section>
+        <br>
         <section class="status-panel">
           <div class="dice-selector">
             <select id="dice-count" aria-label="サイコロの数を選択">
@@ -31,16 +42,6 @@
           </div>
         </section>
 
-        <p class="gesture-hint">3Dエリア上でスワイプしても振ることができます。</p>
-
-        <section class="game-area">
-          <div id="three-container" aria-label="3Dサイコロテーブル"></div>
-        </section>
-
-        <section class="results">
-          <div id="dice-results" class="results-list" aria-live="polite"></div>
-          <div id="total-result" class="total-result">合計: –</div>
-        </section>
       </main>
     </div>
     <script type="module" src="/src/main.ts"></script>

@@ -378,7 +378,7 @@ class DiceLounge {
   private updateResultsPanel() {
     this.resultsList.innerHTML = '';
     if (this.results.length === 0) {
-      this.totalResult.textContent = '合計: –';
+      this.totalResult.textContent = 'Total: –';
       return;
     }
     this.results.forEach((value) => {
@@ -388,7 +388,7 @@ class DiceLounge {
       this.resultsList.appendChild(span);
     });
     const total = this.results.reduce((sum, val) => sum + val, 0);
-    this.totalResult.textContent = `合計: ${total}`;
+    this.totalResult.textContent = `Total: ${total}`;
   }
 
   private animate = () => {
