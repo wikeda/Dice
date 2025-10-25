@@ -189,6 +189,7 @@ header h1 {
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.15);
   font-weight: 600;
+  font-size: 1.2rem;
   width: 40px;
   height: 40px;
   text-align: center;
@@ -267,7 +268,7 @@ header h1 {
     padding: 6px;
     width: 32px;
     height: 32px;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
   }
 
   .total-result {
@@ -306,7 +307,7 @@ header h1 {
     padding: 4px;
     width: 28px;
     height: 28px;
-    font-size: 0.85rem;
+    font-size: 1rem;
   }
 
   .total-result {
