@@ -220,17 +220,17 @@ class DiceLounge {
       canvas.height = size;
       const ctx = canvas.getContext('2d')!;
 
-      const gradient = ctx.createLinearGradient(0, 0, size, size);
-      gradient.addColorStop(0, '#ffffff');
-      gradient.addColorStop(1, '#d6dbea');
-      ctx.fillStyle = gradient;
+      ctx.fillStyle = '#fdfdfd';
       ctx.fillRect(0, 0, size, size);
 
-      ctx.strokeStyle = '#10121f';
+      ctx.strokeStyle = '#353949';
       ctx.lineWidth = 18;
       ctx.strokeRect(30, 30, size - 60, size - 60);
 
-      ctx.fillStyle = '#050912';
+      const pipGradient = ctx.createLinearGradient(0, 0, size, size);
+      pipGradient.addColorStop(0, '#11121c');
+      pipGradient.addColorStop(1, '#323750');
+      ctx.fillStyle = pipGradient;
       const pipRadius = 32;
       const offset = size / 3;
       const positions: Record<number, [number, number][]> = {
@@ -241,10 +241,16 @@ class DiceLounge {
         5: [[-1, -1], [1, -1], [0, 0], [-1, 1], [1, 1]],
         6: [[-1, -1], [1, -1], [-1, 0], [1, 0], [-1, 1], [1, 1]]
       };
-      positions[value].forEach(([x, y]) => {
+      positions[value].forEach(([x, y], index) => {
+        if (value === 1) {
+          ctx.fillStyle = '#c4312c';
+        } else if (index === 0) {
+          ctx.fillStyle = pipGradient;
+        }
         ctx.beginPath();
         ctx.arc(size / 2 + x * offset / 1.5, size / 2 + y * offset / 1.5, pipRadius, 0, Math.PI * 2);
         ctx.fill();
+        ctx.fillStyle = pipGradient;
       });
 
       const texture = new THREE.CanvasTexture(canvas);
