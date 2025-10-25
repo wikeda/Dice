@@ -1,54 +1,47 @@
-# 3Dサイコロアプリ
+﻿# 3Dサイコロ ラウンジ (Vite + TypeScript)
 
-スマートフォン向けの3Dサイコロを振ることができるWebアプリケーションです。
+Three.js と Cannon-es を用いた 3D サイコロ Web アプリです。Vite + TypeScript で構築し、ジェスチャー／ボタン操作で 1〜6 個のサイコロを振ることができます。テーブル内には見えないウォールがあり、サイコロは画面外に出ず、停止時はテーブルに平行な姿勢へスナップされます。
 
-## 機能
+## 主な特徴
+- **ハイエンド UI**: ガラス調のラウンジを想起させるデザインを CSS で実装。
+- **Three.js × Cannon-es 連携**: 3D 表示と物理シミュレーションを分離し、正確な回転とバウンドを再現。
+- **ジェスチャー操作**: 3D エリア上でのスワイプで投射方向と強さ/リフトを算出。
+- **最大 6 個のサイコロ**: 個別結果と合計値を即座に表示。
+- **Vite ビルド**: GitHub Pages など静的ホスティングでそのまま配信可能。
 
-- **3Dサイコロ表示**: Three.jsを使用したリアルな3Dサイコロ
-- **サイコロ選択**: 1個〜3個のサイコロを選択可能
-- **アニメーション**: 自然な回転アニメーション
-- **結果表示**: 各サイコロの目と合計値を表示
-- **レスポンシブデザイン**: スマートフォンに最適化
+## 動かし方
+```bash
+# 依存パッケージのインストール
+npm install
 
-## 使用方法
+# 開発サーバー (ホットリロード)
+npm run dev
 
-1. サイコロの数を選択（1〜3個）
-2. 「サイコロを振る」ボタンをタップ
-3. アニメーション完了後に結果を確認
+# 本番ビルド (dist/ 配下に生成)
+npm run build
 
-## 技術仕様
+# ビルド結果のローカルプレビュー
+npm run preview
+```
 
-- **フロントエンド**: HTML5, CSS3, JavaScript
-- **3Dライブラリ**: Three.js
-- **デプロイ**: GitHub Pages対応
-
-## ファイル構成
-
+## プロジェクト構成
 ```
 Dice/
-├── index.html      # メインHTMLファイル
-├── style.css       # スタイルシート
-├── dice.js         # 3Dサイコロのロジック
-├── requirements.md # 要件定義書
-└── README.md       # このファイル
+├── index.html              # UI レイアウト & 各種ボタン
+├── package.json            # 依存 & スクリプト (TypeScript/Vite)
+├── src/
+│   ├── main.ts             # Three.js + Cannon-es のメインロジック
+│   └── styles.css          # ラグジュアリーなテーマ
+├── tsconfig*.json          # TypeScript 設定
+├── vite.config.ts          # Vite 設定
+└── requirements.md         # 要件定義書
 ```
 
-## GitHub Pagesでの公開
-
-このアプリはGitHub Pagesで公開可能です。
-
-1. このリポジトリをGitHubにプッシュ
-2. リポジトリのSettings > PagesでGitHub Pagesを有効化
-3. ブランチを`main`に設定
-4. 公開URL: `https://[ユーザー名].github.io/[リポジトリ名]/Dice/`
-
-## ブラウザ対応
-
-- Chrome (推奨)
-- Safari
-- Firefox
-- Edge
+## 実装メモ
+- Cannon-es の `sleep` イベントを利用してサイコロが静止した瞬間に出目を確定。
+- 停止後は 90 度単位で姿勢をスナップし、浮き/めり込みを防止。
+- 8 秒以上経過しても停止しない場合はフェイルセーフで結果を確定。
+- Three.js・Cannon-es を単一バンドルに含めているため、`npm run build` で 500 kB 超の警告が出ますが、GitHub Pages 等でのホストは問題ありません。
 
 ## ライセンス
-
 MIT License
