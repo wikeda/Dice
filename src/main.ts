@@ -405,7 +405,7 @@ class DiceLounge {
       mesh.quaternion.set(body.quaternion.x, body.quaternion.y, body.quaternion.z, body.quaternion.w);
     });
 
-    if (this.isRolling && now - this.lastRollStarted > 4000) {
+    if (this.isRolling && now - this.lastRollStarted > 3000) {
       this.forceStopAllDice();
     }
 
