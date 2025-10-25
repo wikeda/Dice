@@ -220,16 +220,16 @@ class DiceLounge {
       canvas.height = size;
       const ctx = canvas.getContext('2d')!;
 
-      ctx.fillStyle = '#fdfdfd';
+      ctx.fillStyle = '#ffffff';
       ctx.fillRect(0, 0, size, size);
 
-      ctx.strokeStyle = '#353949';
-      ctx.lineWidth = 18;
+      ctx.strokeStyle = '#dddddd';
+      ctx.lineWidth = 10;
       ctx.strokeRect(30, 30, size - 60, size - 60);
 
       const pipGradient = ctx.createLinearGradient(0, 0, size, size);
-      pipGradient.addColorStop(0, '#11121c');
-      pipGradient.addColorStop(1, '#323750');
+      pipGradient.addColorStop(0, '#000000');
+      pipGradient.addColorStop(1, '#333333');
       ctx.fillStyle = pipGradient;
       const pipRadius = 32;
       const offset = size / 3;
@@ -243,7 +243,7 @@ class DiceLounge {
       };
       positions[value].forEach(([x, y], index) => {
         if (value === 1) {
-          ctx.fillStyle = '#c4312c';
+          ctx.fillStyle = '#cc0000';
         } else if (index === 0) {
           ctx.fillStyle = pipGradient;
         }
@@ -256,7 +256,13 @@ class DiceLounge {
       const texture = new THREE.CanvasTexture(canvas);
       texture.anisotropy = 4;
       texture.colorSpace = THREE.SRGBColorSpace;
-      return new THREE.MeshStandardMaterial({ map: texture, roughness: 0.15, metalness: 0.2 });
+      return new THREE.MeshStandardMaterial({ 
+        map: texture, 
+        roughness: 0.1, 
+        metalness: 0.1,
+        emissive: 0xffffff,
+        emissiveIntensity: 0.1
+      });
     });
   }
 

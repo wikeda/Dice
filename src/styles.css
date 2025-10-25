@@ -8,7 +8,7 @@
     radial-gradient(circle at 80% 0%, rgba(50, 80, 150, 0.7), transparent 45%),
     #1a1f3a; /* #050913 → #1a1f3a */
   --card: rgba(11, 15, 26, 0.75);
-  --glass: rgba(255, 255, 255, 0.08);
+  --glass: rgba(214, 204, 204, 0.08);
   --text-primary: #f5f7ff;
   --text-muted: #8d96b8;
   --accent: linear-gradient(120deg, #f8d05d, #c9992a);
