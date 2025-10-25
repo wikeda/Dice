@@ -49,7 +49,7 @@ class DiceLounge {
     this.totalResult = document.getElementById('total-result') as HTMLDivElement;
 
     this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color(0x060a17);
+    this.scene.background = new THREE.Color(0x1a1a2e);
 
     const width = this.container.clientWidth;
     const height = this.container.clientHeight;
@@ -98,10 +98,10 @@ class DiceLounge {
   }
 
   private addLights() {
-    const ambient = new THREE.AmbientLight(0xf4f6ff, 0.55);
+    const ambient = new THREE.AmbientLight(0xf4f6ff, 0.8);
     this.scene.add(ambient);
 
-    const spot = new THREE.SpotLight(0xffffff, 1.5, 40, Math.PI / 5, 0.4, 1);
+    const spot = new THREE.SpotLight(0xffffff, 2.2, 40, Math.PI / 5, 0.4, 1);
     spot.position.set(8, 15, 10);
     spot.castShadow = true;
     spot.shadow.mapSize.set(2048, 2048);
@@ -126,11 +126,11 @@ class DiceLounge {
 
     const feltGeometry = new THREE.CylinderGeometry(5.2, 5.2, 0.2, 64);
     const feltMaterial = new THREE.MeshStandardMaterial({
-      color: 0x162041,
+      color: 0x2a3a5c,
       roughness: 0.4,
       metalness: 0.1,
-      emissive: 0x090d1c,
-      emissiveIntensity: 0.3
+      emissive: 0x1a2a4c,
+      emissiveIntensity: 0.5
     });
     const felt = new THREE.Mesh(feltGeometry, feltMaterial);
     felt.receiveShadow = true;
@@ -220,16 +220,16 @@ class DiceLounge {
       canvas.height = size;
       const ctx = canvas.getContext('2d')!;
 
-      ctx.fillStyle = '#ffffff';
+      ctx.fillStyle = '#fdfdfd';
       ctx.fillRect(0, 0, size, size);
 
-      ctx.strokeStyle = '#dddddd';
-      ctx.lineWidth = 10;
+      ctx.strokeStyle = '#353949';
+      ctx.lineWidth = 18;
       ctx.strokeRect(30, 30, size - 60, size - 60);
 
       const pipGradient = ctx.createLinearGradient(0, 0, size, size);
-      pipGradient.addColorStop(0, '#000000');
-      pipGradient.addColorStop(1, '#333333');
+      pipGradient.addColorStop(0, '#11121c');
+      pipGradient.addColorStop(1, '#323750');
       ctx.fillStyle = pipGradient;
       const pipRadius = 32;
       const offset = size / 3;
@@ -243,7 +243,7 @@ class DiceLounge {
       };
       positions[value].forEach(([x, y], index) => {
         if (value === 1) {
-          ctx.fillStyle = '#cc0000';
+          ctx.fillStyle = '#c4312c';
         } else if (index === 0) {
           ctx.fillStyle = pipGradient;
         }
@@ -256,13 +256,7 @@ class DiceLounge {
       const texture = new THREE.CanvasTexture(canvas);
       texture.anisotropy = 4;
       texture.colorSpace = THREE.SRGBColorSpace;
-      return new THREE.MeshStandardMaterial({ 
-        map: texture, 
-        roughness: 0.1, 
-        metalness: 0.1,
-        emissive: 0xffffff,
-        emissiveIntensity: 0.1
-      });
+      return new THREE.MeshStandardMaterial({ map: texture, roughness: 0.15, metalness: 0.2 });
     });
   }
 
@@ -384,7 +378,7 @@ class DiceLounge {
   private updateResultsPanel() {
     this.resultsList.innerHTML = '';
     if (this.results.length === 0) {
-      this.totalResult.textContent = 'Total: –';
+      this.totalResult.textContent = '合計: –';
       return;
     }
     this.results.forEach((value) => {
@@ -394,7 +388,7 @@ class DiceLounge {
       this.resultsList.appendChild(span);
     });
     const total = this.results.reduce((sum, val) => sum + val, 0);
-    this.totalResult.textContent = `Total: ${total}`;
+    this.totalResult.textContent = `合計: ${total}`;
   }
 
   private animate = () => {
