@@ -10,20 +10,28 @@
   --text-muted: #8d96b8;
   --accent: linear-gradient(120deg, #f8d05d, #c9992a);
   --danger: #ef476f;
+  --page-padding: clamp(24px, 4vw, 48px);
 }
 
 * {
   box-sizing: border-box;
 }
 
+html {
+  min-height: 100%;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
+  min-height: 100dvh;
   background: var(--bg);
   color: var(--text-primary);
   display: flex;
   justify-content: center;
-  padding: clamp(24px, 4vw, 48px);
+  padding: var(--page-padding);
+  padding-top: calc(var(--page-padding) + env(safe-area-inset-top, 0px));
+  padding-bottom: calc(var(--page-padding) + env(safe-area-inset-bottom, 0px));
 }
 
 .background-glow {
@@ -40,6 +48,7 @@ body {
   width: min(1100px, 100%);
   position: relative;
   z-index: 1;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 header {
@@ -67,34 +76,30 @@ header h1 {
 
 .status-panel {
   display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
+  flex-wrap: nowrap;
+  gap: 12px;
   padding: 18px 22px;
   background: var(--card);
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 28px;
   box-shadow: 0 20px 65px rgba(0, 0, 0, 0.4);
+  align-items: center;
 }
 
 .dice-selector {
-  flex: 1 1 180px;
+  width: 120px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
+  flex-shrink: 0;
 }
 
-.dice-selector label {
-  letter-spacing: 0.2em;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
 
 #dice-count {
-  border-radius: 14px;
+  border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 12px 14px;
-  font-size: 1rem;
+  padding: 8px 12px;
+  font-size: 0.9rem;
   background: rgba(255, 255, 255, 0.08);
   color: var(--text-primary);
 }
@@ -108,12 +113,17 @@ header h1 {
   font-weight: 600;
   cursor: pointer;
   transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .roll-button {
   background: var(--accent);
   color: #1e1400;
   box-shadow: 0 12px 30px rgba(250, 208, 93, 0.35);
+  flex: 1;
+  min-width: 0;
 }
 
 .roll-button:disabled {
@@ -125,6 +135,8 @@ header h1 {
 .reset-button {
   background: rgba(255, 255, 255, 0.12);
   color: var(--text-primary);
+  flex-shrink: 0;
+  min-width: 90px;
 }
 
 .roll-button:not(:disabled):hover,
@@ -148,7 +160,7 @@ header h1 {
 
 #three-container {
   width: 100%;
-  height: clamp(360px, 50vw, 560px);
+  height: min(60vh, clamp(320px, 50vw, 560px));
   border-radius: 28px;
   overflow: hidden;
   position: relative;
@@ -156,37 +168,43 @@ header h1 {
 }
 
 .results {
-  margin-top: 28px;
+  margin-top: 20px;
   background: var(--card);
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.06);
-  padding: 24px;
+  padding: 16px 20px;
 }
 
 .results-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 8px;
   justify-content: center;
-  min-height: 48px;
+  min-height: 36px;
 }
 
 .dice-result {
-  padding: 10px 16px;
-  border-radius: 12px;
+  padding: 10px;
+  border-radius: 10px;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.15);
   font-weight: 600;
-  min-width: 50px;
+  font-size: 1.6rem;
+  width: 50px;
+  height: 50px;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   animation: pop 0.4s ease;
 }
 
 .total-result {
-  margin-top: 16px;
+  margin-top: 12px;
   text-align: center;
-  letter-spacing: 0.3em;
-  font-size: 1.3rem;
+  letter-spacing: 0.2em;
+  font-size: 1.4rem;
+  font-weight: 700;
 }
 
 @keyframes pop {
@@ -202,12 +220,116 @@ header h1 {
 
 @media (max-width: 720px) {
   .status-panel {
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 8px;
+    padding: 14px 16px;
   }
 
-  .roll-button,
-  .reset-button {
-    width: 100%;
-    text-align: center;
+  .dice-selector {
+    width: 100px;
+    flex-shrink: 0;
   }
+
+  .action-buttons {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .roll-button {
+    flex: 1;
+    min-width: 0;
+    font-size: 0.9rem;
+    padding: 10px 16px;
+  }
+
+  .reset-button {
+    flex-shrink: 0;
+    min-width: 80px;
+    font-size: 0.9rem;
+    padding: 10px 12px;
+  }
+
+  body {
+    padding: 18px;
+    padding-top: calc(18px + env(safe-area-inset-top, 0px));
+    padding-bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+  }
+
+  #three-container {
+    height: min(55vh, 420px);
+  }
+
+  .results {
+    margin-top: 16px;
+    padding: 12px 16px;
+  }
+
+  .dice-result {
+    padding: 8px;
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+  }
+
+  .total-result {
+    font-size: 1.3rem;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .status-panel {
+    gap: 6px;
+    padding: 12px 14px;
+  }
+
+  .dice-selector {
+    width: 90px;
+  }
+
+  .roll-button {
+    font-size: 0.85rem;
+    padding: 8px 12px;
+  }
+
+  .reset-button {
+    min-width: 70px;
+    font-size: 0.85rem;
+    padding: 8px 10px;
+  }
+
+  .results {
+    margin-top: 14px;
+    padding: 10px 14px;
+  }
+
+  .dice-result {
+    padding: 6px;
+    width: 36px;
+    height: 36px;
+    font-size: 1.4rem;
+  }
+
+  .total-result {
+    font-size: 1.2rem;
+    margin-top: 8px;
+  }
+}
+#dice-count {
+  width: 100%;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  flex: 1;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 0;
+}
+
+.action-buttons .reset-button {
+  min-width: 90px;
+  padding: 8px 14px;
 }

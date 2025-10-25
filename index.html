@@ -12,23 +12,7 @@
     <div id="app">
       <div class="background-glow"></div>
       <main class="container" aria-live="polite">
-        <header></header>
-
-        <section class="status-panel">
-          <div class="dice-selector">
-            <label for="dice-count">サイコロの数</label>
-            <select id="dice-count" aria-label="サイコロの数を選択">
-              <option value="1">1個</option>
-              <option value="2">2個</option>
-              <option value="3">3個</option>
-              <option value="4">4個</option>
-              <option value="5">5個</option>
-              <option value="6">6個</option>
-            </select>
-          </div>
-          <button id="roll-button" class="roll-button">サイコロを振る</button>
-          <button id="reset-button" class="reset-button" aria-label="サイコロをリセット">リセット</button>
-        </section>
+        <!--header></header-->
 
         <p class="gesture-hint">3Dエリア上でスワイプしても振ることができます。</p>
 
@@ -38,8 +22,26 @@
 
         <section class="results">
           <div id="dice-results" class="results-list" aria-live="polite"></div>
-          <div id="total-result" class="total-result">合計: –</div>
+          <div id="total-result" class="total-result">Total: –</div>
         </section>
+        <br>
+        <section class="status-panel">
+          <div class="dice-selector">
+            <select id="dice-count" aria-label="サイコロの数を選択">
+              <option value="1">1個</option>
+              <option value="2">2個</option>
+              <option value="3">3個</option>
+              <option value="4">4個</option>
+              <option value="5">5個</option>
+              <option value="6">6個</option>
+            </select>
+          </div>
+          <div class="action-buttons">
+            <button id="roll-button" class="roll-button">サイコロを振る</button>
+            <button id="reset-button" class="reset-button" aria-label="サイコロをリセット">リセット</button>
+          </div>
+        </section>
+
       </main>
     </div>
     <script type="module" src="/src/main.ts"></script>

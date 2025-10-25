@@ -7,30 +7,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <script type="module" crossorigin src="/Dice/assets/index-DkyhP_Mz.js"></script>
-    <link rel="stylesheet" crossorigin href="/Dice/assets/index-NRdWvtQT.css">
+    <script type="module" crossorigin src="/Dice/assets/index-DzKipJ5v.js"></script>
+    <link rel="stylesheet" crossorigin href="/Dice/assets/index-ByYAegV9.css">
   </head>
   <body>
     <div id="app">
       <div class="background-glow"></div>
       <main class="container" aria-live="polite">
-        <header></header>
-
-        <section class="status-panel">
-          <div class="dice-selector">
-            <label for="dice-count">サイコロの数</label>
-            <select id="dice-count" aria-label="サイコロの数を選択">
-              <option value="1">1個</option>
-              <option value="2">2個</option>
-              <option value="3">3個</option>
-              <option value="4">4個</option>
-              <option value="5">5個</option>
-              <option value="6">6個</option>
-            </select>
-          </div>
-          <button id="roll-button" class="roll-button">サイコロを振る</button>
-          <button id="reset-button" class="reset-button" aria-label="サイコロをリセット">リセット</button>
-        </section>
+        <!--header></header-->
 
         <p class="gesture-hint">3Dエリア上でスワイプしても振ることができます。</p>
 
@@ -40,8 +24,26 @@
 
         <section class="results">
           <div id="dice-results" class="results-list" aria-live="polite"></div>
-          <div id="total-result" class="total-result">合計: –</div>
+          <div id="total-result" class="total-result">Total: –</div>
         </section>
+        <br>
+        <section class="status-panel">
+          <div class="dice-selector">
+            <select id="dice-count" aria-label="サイコロの数を選択">
+              <option value="1">1個</option>
+              <option value="2">2個</option>
+              <option value="3">3個</option>
+              <option value="4">4個</option>
+              <option value="5">5個</option>
+              <option value="6">6個</option>
+            </select>
+          </div>
+          <div class="action-buttons">
+            <button id="roll-button" class="roll-button">サイコロを振る</button>
+            <button id="reset-button" class="reset-button" aria-label="サイコロをリセット">リセット</button>
+          </div>
+        </section>
+
       </main>
     </div>
   </body>
