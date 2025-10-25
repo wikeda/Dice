@@ -1,9 +1,9 @@
-<!doctype html>
+ï»¿<!doctype html>
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>3D ƒTƒCƒRƒ ƒ‰ƒEƒ“ƒW</title>
+    <title>3D ã‚µã‚¤ã‚³ãƒ­ ãƒ©ã‚¦ãƒ³ã‚¸</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
@@ -12,38 +12,36 @@
     <div id="app">
       <div class="background-glow"></div>
       <main class="container" aria-live="polite">
-        
+        <header></header>
 
         <section class="status-panel">
           <div class="dice-selector">
-            <label for="dice-count">ƒTƒCƒRƒ‚Ì”</label>
-            <select id="dice-count" aria-label="ƒTƒCƒRƒ‚Ì”‚ð‘I‘ð">
-              <option value="1">1ŒÂ</option>
-              <option value="2">2ŒÂ</option>
-              <option value="3">3ŒÂ</option>
-              <option value="4">4ŒÂ</option>
-              <option value="5">5ŒÂ</option>
-              <option value="6">6ŒÂ</option>
+            <label for="dice-count">ã‚µã‚¤ã‚³ãƒ­ã®æ•°</label>
+            <select id="dice-count" aria-label="ã‚µã‚¤ã‚³ãƒ­ã®æ•°ã‚’é¸æŠž">
+              <option value="1">1å€‹</option>
+              <option value="2">2å€‹</option>
+              <option value="3">3å€‹</option>
+              <option value="4">4å€‹</option>
+              <option value="5">5å€‹</option>
+              <option value="6">6å€‹</option>
             </select>
           </div>
-          <button id="roll-button" class="roll-button">ƒTƒCƒRƒ‚ðU‚é</button>
-          <button id="reset-button" class="reset-button" aria-label="ƒTƒCƒRƒ‚ðƒŠƒZƒbƒg">ƒŠƒZƒbƒg</button>
+          <button id="roll-button" class="roll-button">ã‚µã‚¤ã‚³ãƒ­ã‚’æŒ¯ã‚‹</button>
+          <button id="reset-button" class="reset-button" aria-label="ã‚µã‚¤ã‚³ãƒ­ã‚’ãƒªã‚»ãƒƒãƒˆ">ãƒªã‚»ãƒƒãƒˆ</button>
         </section>
 
-        <p class="gesture-hint">3DƒGƒŠƒAã‚ÅƒXƒƒCƒv‚µ‚Ä‚àU‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·B</p>
+        <p class="gesture-hint">3Dã‚¨ãƒªã‚¢ä¸Šã§ã‚¹ãƒ¯ã‚¤ãƒ—ã—ã¦ã‚‚æŒ¯ã‚‹ã“ã¨ãŒã§ãã¾ã™ã€‚</p>
 
         <section class="game-area">
-          <div id="three-container" aria-label="3DƒTƒCƒRƒƒe[ƒuƒ‹"></div>
+          <div id="three-container" aria-label="3Dã‚µã‚¤ã‚³ãƒ­ãƒ†ãƒ¼ãƒ–ãƒ«"></div>
         </section>
 
         <section class="results">
           <div id="dice-results" class="results-list" aria-live="polite"></div>
-          <div id="total-result" class="total-result">‡Œv: ?</div>
+          <div id="total-result" class="total-result">åˆè¨ˆ: â€“</div>
         </section>
       </main>
     </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
-
-
