@@ -4,6 +4,9 @@
   --bg: radial-gradient(circle at 20% 20%, rgba(71, 83, 130, 0.6), transparent 55%),
     radial-gradient(circle at 80% 0%, rgba(15, 39, 80, 0.55), transparent 45%),
     #050913;
+  --bg: radial-gradient(circle at 20% 20%, rgba(100, 120, 180, 0.8), transparent 55%),
+    radial-gradient(circle at 80% 0%, rgba(50, 80, 150, 0.7), transparent 45%),
+    #1a1f3a; /* #050913 → #1a1f3a */
   --card: rgba(11, 15, 26, 0.75);
   --glass: rgba(255, 255, 255, 0.08);
   --text-primary: #f5f7ff;
