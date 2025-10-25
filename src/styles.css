@@ -76,19 +76,22 @@ header h1 {
 
 .status-panel {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+  flex-wrap: nowrap;
   gap: 12px;
-  padding: 14px 18px;
-  margin-top: 24px;
+  padding: 18px 22px;
   background: var(--card);
   border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 999px;
+  border-radius: 28px;
   box-shadow: 0 20px 65px rgba(0, 0, 0, 0.4);
+  align-items: center;
 }
 
 .dice-selector {
   width: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex-shrink: 0;
 }
 
 
@@ -110,12 +113,17 @@ header h1 {
   font-weight: 600;
   cursor: pointer;
   transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .roll-button {
   background: var(--accent);
   color: #1e1400;
   box-shadow: 0 12px 30px rgba(250, 208, 93, 0.35);
+  flex: 1;
+  min-width: 0;
 }
 
 .roll-button:disabled {
@@ -127,6 +135,8 @@ header h1 {
 .reset-button {
   background: rgba(255, 255, 255, 0.12);
   color: var(--text-primary);
+  flex-shrink: 0;
+  min-width: 90px;
 }
 
 .roll-button:not(:disabled):hover,
@@ -204,21 +214,34 @@ header h1 {
 
 @media (max-width: 720px) {
   .status-panel {
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 8px;
+    padding: 14px 16px;
   }
 
   .dice-selector {
-    width: 100%;
+    width: 100px;
+    flex-shrink: 0;
   }
 
   .action-buttons {
-    width: 100%;
+    flex: 1;
+    min-width: 0;
   }
 
-  .roll-button,
+  .roll-button {
+    flex: 1;
+    min-width: 0;
+    font-size: 0.9rem;
+    padding: 10px 16px;
+  }
+
   .reset-button {
-    width: 100%;
-    text-align: center;
+    flex-shrink: 0;
+    min-width: 80px;
+    font-size: 0.9rem;
+    padding: 10px 12px;
   }
 
   body {
@@ -231,6 +254,28 @@ header h1 {
     height: min(55vh, 420px);
   }
 }
+
+@media (max-width: 480px) {
+  .status-panel {
+    gap: 6px;
+    padding: 12px 14px;
+  }
+
+  .dice-selector {
+    width: 90px;
+  }
+
+  .roll-button {
+    font-size: 0.85rem;
+    padding: 8px 12px;
+  }
+
+  .reset-button {
+    min-width: 70px;
+    font-size: 0.85rem;
+    padding: 8px 10px;
+  }
+}
 #dice-count {
   width: 100%;
 }
@@ -241,6 +286,7 @@ header h1 {
   flex: 1;
   align-items: center;
   justify-content: flex-start;
+  min-width: 0;
 }
 
 .action-buttons .reset-button {
