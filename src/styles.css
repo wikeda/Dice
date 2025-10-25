@@ -77,27 +77,20 @@ header h1 {
 .status-panel {
   display: flex;
   flex-wrap: wrap;
-  gap: 14px;
-  padding: 18px 22px;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  margin-top: 24px;
   background: var(--card);
   border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 28px;
+  border-radius: 999px;
   box-shadow: 0 20px 65px rgba(0, 0, 0, 0.4);
 }
 
 .dice-selector {
-  width: 100px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  width: 120px;
 }
 
-.dice-selector label {
-  letter-spacing: 0.15em;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
 
 #dice-count {
   border-radius: 12px;
@@ -244,12 +237,13 @@ header h1 {
 
 .action-buttons {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   flex: 1;
   align-items: center;
+  justify-content: flex-start;
 }
 
 .action-buttons .reset-button {
-  min-width: 110px;
-  padding: 10px 20px;
+  min-width: 90px;
+  padding: 8px 14px;
 }
