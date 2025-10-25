@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3D サイコロ ラウンジ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <script type="module" crossorigin src="/Dice/assets/index-B69XdYu3.js"></script>
+    <link rel="stylesheet" crossorigin href="/Dice/assets/index-NRdWvtQT.css">
+  </head>
+  <body>
+    <div id="app">
+      <div class="background-glow"></div>
+      <main class="container" aria-live="polite">
+        <header>
+          <p class="tagline">Immersive Dice Experience</p>
+          <h1>3D サイコロ ラウンジ</h1>
+          <p class="subtext">ボタンでも、スワイプでも。滑らかなモーションで結果を魅せる。</p>
+        </header>
+
+        <section class="status-panel">
+          <div class="dice-selector">
+            <label for="dice-count">サイコロの数</label>
+            <select id="dice-count" aria-label="サイコロの数を選択">
+              <option value="1">1個</option>
+              <option value="2">2個</option>
+              <option value="3">3個</option>
+              <option value="4">4個</option>
+              <option value="5">5個</option>
+              <option value="6">6個</option>
+            </select>
+          </div>
+          <button id="roll-button" class="roll-button">サイコロを振る</button>
+          <button id="reset-button" class="reset-button" aria-label="サイコロをリセット">リセット</button>
+        </section>
+
+        <p class="gesture-hint">3Dエリア上でスワイプしても振ることができます。</p>
+
+        <section class="game-area">
+          <div id="three-container" aria-label="3Dサイコロテーブル"></div>
+        </section>
+
+        <section class="results">
+          <div id="dice-results" class="results-list" aria-live="polite"></div>
+          <div id="total-result" class="total-result">合計: –</div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
