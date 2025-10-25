@@ -168,37 +168,37 @@ header h1 {
 }
 
 .results {
-  margin-top: 28px;
+  margin-top: 20px;
   background: var(--card);
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.06);
-  padding: 24px;
+  padding: 16px 20px;
 }
 
 .results-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 8px;
   justify-content: center;
-  min-height: 48px;
+  min-height: 36px;
 }
 
 .dice-result {
-  padding: 10px 16px;
+  padding: 6px 12px;
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.15);
   font-weight: 600;
-  min-width: 50px;
+  min-width: 40px;
   text-align: center;
   animation: pop 0.4s ease;
 }
 
 .total-result {
-  margin-top: 16px;
+  margin-top: 12px;
   text-align: center;
-  letter-spacing: 0.3em;
-  font-size: 1.3rem;
+  letter-spacing: 0.2em;
+  font-size: 1.1rem;
 }
 
 @keyframes pop {
@@ -253,6 +253,22 @@ header h1 {
   #three-container {
     height: min(55vh, 420px);
   }
+
+  .results {
+    margin-top: 16px;
+    padding: 12px 16px;
+  }
+
+  .dice-result {
+    padding: 4px 8px;
+    min-width: 32px;
+    font-size: 0.9rem;
+  }
+
+  .total-result {
+    font-size: 1rem;
+    margin-top: 10px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -274,6 +290,22 @@ header h1 {
     min-width: 70px;
     font-size: 0.85rem;
     padding: 8px 10px;
+  }
+
+  .results {
+    margin-top: 14px;
+    padding: 10px 14px;
+  }
+
+  .dice-result {
+    padding: 3px 6px;
+    min-width: 28px;
+    font-size: 0.85rem;
+  }
+
+  .total-result {
+    font-size: 0.95rem;
+    margin-top: 8px;
   }
 }
 #dice-count {
