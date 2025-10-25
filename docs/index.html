@@ -7,8 +7,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <script type="module" crossorigin src="/Dice/assets/index-DzKipJ5v.js"></script>
-    <link rel="stylesheet" crossorigin href="/Dice/assets/index-ByYAegV9.css">
+    <script type="module" crossorigin src="/Dice/assets/index-DifAn_gI.js"></script>
+    <link rel="stylesheet" crossorigin href="/Dice/assets/index-CYfYfp47.css">
   </head>
   <body>
     <div id="app">
@@ -16,17 +16,17 @@
       <main class="container" aria-live="polite">
         <!--header></header-->
 
-        <p class="gesture-hint">3Dエリア上でスワイプしても振ることができます。</p>
-
         <section class="game-area">
-          <div id="three-container" aria-label="3Dサイコロテーブル"></div>
+          <div id="three-container" aria-label="3Dサイコロテーブル">
+            <div class="gesture-hint-overlay">スワイプで振る</div>
+          </div>
         </section>
 
         <section class="results">
           <div id="dice-results" class="results-list" aria-live="polite"></div>
           <div id="total-result" class="total-result">Total: –</div>
         </section>
-        <br>
+
         <section class="status-panel">
           <div class="dice-selector">
             <select id="dice-count" aria-label="サイコロの数を選択">
@@ -43,6 +43,7 @@
             <button id="reset-button" class="reset-button" aria-label="サイコロをリセット">リセット</button>
           </div>
         </section>
+        <div class="swipe-hint">ダイスをスワイプで振ることもできます</div>
 
       </main>
     </div>
