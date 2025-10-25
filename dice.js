@@ -7,6 +7,8 @@ class DiceGame {
         this.diceCount = 1;
         this.isRolling = false;
         this.results = [];
+        this.lastTime = 0;
+        this.deltaTime = 0;
         
         this.init();
         this.setupEventListeners();
@@ -16,14 +18,20 @@ class DiceGame {
     init() {
         // シーン、カメラ、レンダラーの初期化
         this.scene = new THREE.Scene();
-        this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         
         const container = document.getElementById('three-container');
         console.log('Container found:', container);
         console.log('Container size:', container.clientWidth, container.clientHeight);
         
+        // コンテナのサイズを使用してカメラとレンダラーを初期化
+        const containerWidth = container.clientWidth;
+        const containerHeight = container.clientHeight;
+        const aspectRatio = containerWidth / containerHeight;
+        
+        this.camera = new THREE.PerspectiveCamera(75, aspectRatio, 0.1, 1000);
+        
         this.renderer = new THREE.WebGLRenderer({ antialias: true });
-        this.renderer.setSize(container.clientWidth, container.clientHeight);
+        this.renderer.setSize(containerWidth, containerHeight);
         this.renderer.shadowMap.enabled = true;
         this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         this.renderer.setClearColor(0xf0f0f0);
@@ -114,21 +122,27 @@ class DiceGame {
         ];
         
         faces.forEach(face => {
+            // 各面用の個別キャンバスを作成
+            const faceCanvas = document.createElement('canvas');
+            faceCanvas.width = 512;
+            faceCanvas.height = 512;
+            const faceCtx = faceCanvas.getContext('2d');
+            
             // 背景を描画（白いサイコロ）
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(0, 0, 512, 512);
+            faceCtx.fillStyle = '#ffffff';
+            faceCtx.fillRect(0, 0, 512, 512);
             
             // 枠線を描画
-            ctx.strokeStyle = '#000000';
-            ctx.lineWidth = 4;
-            ctx.strokeRect(0, 0, 512, 512);
+            faceCtx.strokeStyle = '#000000';
+            faceCtx.lineWidth = 4;
+            faceCtx.strokeRect(0, 0, 512, 512);
             
             // ドットを描画
-            ctx.fillStyle = '#000000';
-            this.drawDots(ctx, face.dots);
+            faceCtx.fillStyle = '#000000';
+            this.drawDots(faceCtx, face.dots);
             
             // テクスチャを作成
-            const texture = new THREE.CanvasTexture(canvas);
+            const texture = new THREE.CanvasTexture(faceCanvas);
             const material = new THREE.MeshPhongMaterial({ 
                 map: texture,
                 shininess: 30,
@@ -196,14 +210,15 @@ class DiceGame {
         });
         this.dice = [];
         
-        // 簡単なサイコロを作成（デバッグ用）
-        const geometry = new THREE.BoxGeometry(2, 2, 2);
-        const material = new THREE.MeshPhongMaterial({ color: 0xff0000 }); // 赤色にして見やすくする
+        // ドット付きテクスチャを使用したサイコロを作成
+        const { geometry, materials } = this.createDiceGeometry();
         
         // 指定された数のサイコロを作成
         for (let i = 0; i < this.diceCount; i++) {
-            const mesh = new THREE.Mesh(geometry, material);
-            mesh.position.set((i - (this.diceCount - 1) / 2) * 4, 2, 0);
+            const mesh = new THREE.Mesh(geometry, materials);
+            // サイコロの数に応じて間隔を調整
+            const spacing = Math.max(3, 6 - this.diceCount);
+            mesh.position.set((i - (this.diceCount - 1) / 2) * spacing, 2, 0);
             mesh.castShadow = true;
             mesh.receiveShadow = true;
             
@@ -286,11 +301,16 @@ class DiceGame {
     updateDicePhysics(dice) {
         if (!dice.isRolling) return;
         
-        // 重力を適用
-        dice.velocity.y -= dice.gravity;
+        // 時間ベースの物理シミュレーション
+        const dt = this.deltaTime;
         
-        // 位置を更新
-        dice.position.add(dice.velocity);
+        // 重力を適用（時間ベース）
+        dice.velocity.y -= dice.gravity * dt;
+        
+        // 位置を更新（時間ベース）
+        dice.position.x += dice.velocity.x * dt;
+        dice.position.y += dice.velocity.y * dt;
+        dice.position.z += dice.velocity.z * dt;
         
         // 床との衝突判定
         if (dice.position.y <= 1) { // サイコロの半径（1）で床に接触
@@ -316,13 +336,14 @@ class DiceGame {
             }
         }
         
-        // 回転を更新
-        dice.rotation.x += dice.angularVelocity.x;
-        dice.rotation.y += dice.angularVelocity.y;
-        dice.rotation.z += dice.angularVelocity.z;
+        // 回転を更新（時間ベース）
+        dice.rotation.x += dice.angularVelocity.x * dt;
+        dice.rotation.y += dice.angularVelocity.y * dt;
+        dice.rotation.z += dice.angularVelocity.z * dt;
         
-        // 回転速度を減衰
-        dice.angularVelocity.multiplyScalar(0.99);
+        // 回転速度を減衰（時間ベース）
+        const angularDecay = Math.pow(0.99, dt * 60); // 60FPS基準で正規化
+        dice.angularVelocity.multiplyScalar(angularDecay);
         
         // メッシュの位置と回転を更新
         dice.mesh.position.copy(dice.position);
@@ -332,8 +353,8 @@ class DiceGame {
     stopDice(dice) {
         dice.isRolling = false;
         
-        // サイコロの値を決定（回転に基づいてランダム）
-        const value = Math.floor(Math.random() * 6) + 1;
+        // サイコロの値を決定（実際の向きに基づく）
+        const value = this.calculateDiceValue(dice);
         dice.value = value;
         this.results.push(value);
         
@@ -341,6 +362,41 @@ class DiceGame {
         if (this.results.length === this.diceCount) {
             this.showResults();
         }
+    }
+    
+    calculateDiceValue(dice) {
+        // サイコロの現在の回転から、上向きの面を計算
+        const rotation = dice.mesh.rotation;
+        
+        // 各面の法線ベクトルを計算
+        const faces = [
+            { normal: new THREE.Vector3(0, 1, 0), value: 1 },   // 上面
+            { normal: new THREE.Vector3(0, -1, 0), value: 6 },  // 下面
+            { normal: new THREE.Vector3(1, 0, 0), value: 4 },   // 右面
+            { normal: new THREE.Vector3(-1, 0, 0), value: 3 },  // 左面
+            { normal: new THREE.Vector3(0, 0, 1), value: 2 },   // 前面
+            { normal: new THREE.Vector3(0, 0, -1), value: 5 }   // 後面
+        ];
+        
+        // ワールド座標での上向きベクトル
+        const worldUp = new THREE.Vector3(0, 1, 0);
+        
+        let maxDot = -1;
+        let resultValue = 1;
+        
+        // 各面の法線ベクトルをワールド座標に変換して比較
+        faces.forEach(face => {
+            const worldNormal = face.normal.clone();
+            worldNormal.applyQuaternion(dice.mesh.quaternion);
+            
+            const dot = worldNormal.dot(worldUp);
+            if (dot > maxDot) {
+                maxDot = dot;
+                resultValue = face.value;
+            }
+        });
+        
+        return resultValue;
     }
     
     showResults() {
@@ -380,10 +436,17 @@ class DiceGame {
         });
     }
     
-    animate() {
-        requestAnimationFrame(() => this.animate());
+    animate(currentTime = 0) {
+        requestAnimationFrame((time) => this.animate(time));
         
-        // 物理シミュレーションを実行
+        // デルタタイムを計算
+        if (this.lastTime === 0) {
+            this.lastTime = currentTime;
+        }
+        this.deltaTime = (currentTime - this.lastTime) / 1000; // 秒に変換
+        this.lastTime = currentTime;
+        
+        // 物理シミュレーションを実行（時間ベース）
         this.dice.forEach(dice => {
             this.updateDicePhysics(dice);
         });
@@ -402,6 +465,7 @@ class DiceGame {
         const width = container.clientWidth;
         const height = container.clientHeight;
         
+        // カメラとレンダラーのアスペクト比を同期
         this.camera.aspect = width / height;
         this.camera.updateProjectionMatrix();
         this.renderer.setSize(width, height);
