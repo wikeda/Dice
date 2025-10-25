@@ -7,15 +7,26 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <script type="module" crossorigin src="/Dice/assets/index-BOYBxQHy.js"></script>
-    <link rel="stylesheet" crossorigin href="/Dice/assets/index-CFaiTm_Q.css">
+    <script type="module" crossorigin src="/Dice/assets/index-DzKipJ5v.js"></script>
+    <link rel="stylesheet" crossorigin href="/Dice/assets/index-ByYAegV9.css">
   </head>
   <body>
     <div id="app">
       <div class="background-glow"></div>
       <main class="container" aria-live="polite">
-        <header></header>
+        <!--header></header-->
 
+        <p class="gesture-hint">3Dエリア上でスワイプしても振ることができます。</p>
+
+        <section class="game-area">
+          <div id="three-container" aria-label="3Dサイコロテーブル"></div>
+        </section>
+
+        <section class="results">
+          <div id="dice-results" class="results-list" aria-live="polite"></div>
+          <div id="total-result" class="total-result">Total: –</div>
+        </section>
+        <br>
         <section class="status-panel">
           <div class="dice-selector">
             <select id="dice-count" aria-label="サイコロの数を選択">
@@ -33,16 +44,6 @@
           </div>
         </section>
 
-        <p class="gesture-hint">3Dエリア上でスワイプしても振ることができます。</p>
-
-        <section class="game-area">
-          <div id="three-container" aria-label="3Dサイコロテーブル"></div>
-        </section>
-
-        <section class="results">
-          <div id="dice-results" class="results-list" aria-live="polite"></div>
-          <div id="total-result" class="total-result">合計: –</div>
-        </section>
       </main>
     </div>
   </body>
